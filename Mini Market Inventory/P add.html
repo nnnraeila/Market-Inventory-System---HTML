@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("spgg/bg.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .header {
+            background: #9dafa2;
+            padding: 8px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header button {
+            background: #dce8cd;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            flex: 1;
+            padding: 8px;
+            background: #f7eccd;
+            text-align: left;
+            margin-right: 10px;
+            width: 120px;
+        }
+        .form-group input, .form-group select {
+            flex: 2;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .upload-box {
+            border: 2px dashed #76785a;
+            text-align: center;
+            padding: 30px;
+            margin: 20px 0;
+            background: #dce8cd;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .clear-btn {
+            background: #f5d5b5;
+        }
+        .submit-btn {
+            background: #f5a5a5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Add Product</h1>
+            <button onclick="window.location.href='dashboard.html'">Back</button>
+        </div>
+        <form id="productForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category">
+                    <option value="beverage">Beverage</option>
+                    <option value="snacks">Snacks</option>
+                    <option value="fresh produce">Fresh Produce</option>
+                    <option value="meat">Meat</option>
+                    <option value="seafood">Seafood</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity in Stock</label>
+                <input type="text" id="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price (RM)</label>
+                <input type="text" id="price" required>
+            </div>
+            <div class="form-group">
+                <label for="expiry">Expiry Date</label>
+                <input type="date" id="expiry" required>
+            </div>
+            <div class="upload-box" id="uploadBox" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+                <p>Upload Image</p>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+            <div class="buttons">
+                <button type="button" class="clear-btn" onclick="clearForm()">Clear</button>
+                <button type="submit" class="submit-btn">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function clearForm() {
+            document.getElementById("productForm").reset();
+        }
+        function dropHandler(event) {
+            event.preventDefault();
+            let file = event.dataTransfer.files[0];
+            document.getElementById("fileInput").files = event.dataTransfer.files;
+        }
+        function dragOverHandler(event) {
+            event.preventDefault();
+        }
+    </script>
+</body>
+</html>

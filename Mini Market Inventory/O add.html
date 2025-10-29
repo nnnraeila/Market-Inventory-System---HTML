@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("spgg/bg.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 800px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: #9dafa2;
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .header button {
+            background: #dce8cd;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        .header button:hover {
+            background: #c5d5b5;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            flex: 1;
+            padding: 10px;
+            background: #f7eccd;
+            text-align: left;
+            margin-right: 15px;
+            width: 120px;
+            border-radius: 4px;
+        }
+        .form-group input, .form-group select {
+            flex: 2;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .buttons button {
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .clear-btn {
+            background: #f5d5b5;
+        }
+        .clear-btn:hover {
+            background: #e5c5a5;
+        }
+        .submit-btn {
+            background: #f5a5a5;
+            color: white;
+        }
+        .submit-btn:hover {
+            background: #e59595;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Create Order</h1>
+            <button onclick="window.location.href='dashboard.html'">To dashboard</button>
+        </div>
+        
+        <form id="orderForm">
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" onchange="updateProductNames()">
+                    <option value="Beverage">Beverage</option>
+                    <option value="Snack">Snack</option>
+                    <option value="Fresh Produce">Fresh Produce</option>
+                    <option value="Meat & Seafood">Meat & Seafood</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Name</label>
+                <select id="productName"></select>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity">
+            </div>
+            
+            <div class="form-group">
+                <label for="supplier">Supplier</label>
+                <input type="text" id="supplier">
+            </div>
+            
+            <div class="form-group">
+                <label for="contact">Contact</label>
+                <input type="text" id="contact">
+            </div>
+            
+            <div class="buttons">
+                <button type="button" class="submit-btn" onclick="submitOrder()">Submit</button>
+                <button type="reset" class="clear-btn">Clear</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const productOptions = {
+            "Beverage": ["A&W Root Beer", "Mineral Water", "Milk"],
+            "Snack": ["Mi-Mi", "Biscuit", "Bread"],
+            "Fresh Produce": ["Apple", "Carrot", "Onion"],
+            "Meat & Seafood": ["Shrimp", "Fish", "Chicken"]
+        };
+        
+        function updateProductNames() {
+            const category = document.getElementById("category").value;
+            const productSelect = document.getElementById("productName");
+            productSelect.innerHTML = "";
+            productOptions[category].forEach(product => {
+                let option = document.createElement("option");
+                option.value = product;
+                option.textContent = product;
+                productSelect.appendChild(option);
+            });
+        }
+        
+        function submitOrder() {
+            const category = document.getElementById("category").value;
+            const productName = document.getElementById("productName").value;
+            const quantity = document.getElementById("quantity").value;
+            const supplier = document.getElementById("supplier").value;
+            const contact = document.getElementById("contact").value;
+            
+            if (!quantity || !supplier || !contact) {
+                alert("Please fill in all fields.");
+                return;
+            }
+            
+            const orderData = {
+                category, 
+                productName, 
+                quantity, 
+                supplier, 
+                contact
+            };
+            
+            localStorage.setItem("latestOrder", JSON.stringify(orderData));
+            alert("Order submitted successfully!");
+            window.location.href = 'order_list.html';
+        }
+        
+        window.onload = updateProductNames;
+    </script>
+</body>
+</html>

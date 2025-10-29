@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* General Styling */
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            background-image: url("spgg/dash.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background-color: #dae4cc;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            position: relative; 
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: black;
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 5px 10px;
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: white;
+			font-size: 20px;
+            background-color: #777b67;
+            padding: 1px 6px;
+            border-radius: 5px;
+        }
+
+        /* Info Boxes */
+        .info-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-box {
+            background-color: white;
+            padding: 15px;
+            width: 150px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Notification Box */
+        .notification {
+            background-color: #f2ebd5;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+            width: 450px;
+            height: 280px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Notification Image */
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        #notif-img {
+            width: 350px;
+            height: auto;
+            border-radius: 8px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Arrows */
+        .arrow {
+            background: none;
+            color: #a7796b;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            margin-bottom: 10px;
+        }
+
+        .dropdown p {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            padding-left: 10px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Login Time Box */
+        .login-time-box {
+			background-color: white;
+            padding: 4px 15px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 13px;
+            position: absolute;
+            top: 165px;
+            left: 5px;
+            width: calc(100% - 48px);
+			height: auto
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            width: 100%;
+            text-align: left;
+        }
+
+        /* Dashboard Icon */
+        .dashboard-icon {
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: left;
+			position: relative;
+        }
+
+        .dashboard-icon img {
+            width: 120px;
+            height: 110px;
+            border-radius: 8px;
+			position: relative;
+			left: 95px;
+			margin-left: -55px; /* Alternative approach that also works */
+		}
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="dashboard-header">Dashboard</div>
+        <div class="dashboard-icon">
+            <img src="spgg/icon.png" alt="Dashboard Icon">
+        </div>
+        
+		<div class="dropdown" style="margin-top: 80px;">
+            <p>Order</p>
+            <div class="dropdown-content">
+                <p><a href="O view.html">View Orders</a></p>
+                <p><a href="O add.html">Create Order</a></p>
+            </div>
+        </div>
+        
+        <div class="dropdown">
+            <p>Product</p>
+            <div class="dropdown-content">
+                <p><a href="P view.html">View Product</a></p>
+                <p><a href="P add.html">Add Product</a></p>
+                <p><a href="P edit.html">Edit Product</a></p>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <p><strong><a href="sales.html">Sales Report</a></strong></p>
+        </div>
+
+        <!-- Display Login Time -->
+        <div class="login-time-box">
+            <p>Login Time:</p>
+            <p id="login-date"></p>
+            <p id="login-time"></p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="header"><a href="login.html" style="text-decoration: none; color: white;">Logout</a></div>
+        <br></br>
+		<br></br>
+
+        <!-- Info Boxes -->
+        <div class="info-boxes">
+            <div class="info-box"><b>User</b><br>3</div>
+            <div class="info-box"><b>Category</b><br>4</div>
+            <div class="info-box"><b>Product</b><br>12</div>
+            <div class="info-box"><b>Low Stock</b><br>3</div>
+        </div>
+
+        <!-- Notification Box -->
+        <div class="notification">
+            <h3>Notification</h3>
+            <div class="image-container">
+                <button class="arrow" onclick="changeImage(-1)">&#9664;</button>
+                <img id="notif-img" src="spgg/not1.png" alt="Notification image">
+                <button class="arrow" onclick="changeImage(1)">&#9654;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+         // Image slideshow functionality
+        const images = ['spgg/not1.png', 'spgg/not2.png', 'spgg/not3.png'];
+        let currentIndex = 0;
+        let slideshowInterval;
+        const slideshowDelay = 3000; // 3 seconds between images
+
+        function changeImage(direction) {
+            // Stop automatic slideshow when user manually changes image
+            clearInterval(slideshowInterval);
+            
+            currentIndex = (currentIndex + direction + images.length) % images.length;
+            document.getElementById('notif-img').src = images[currentIndex];
+            
+            // Restart the slideshow after manual change
+            startSlideshow();
+        }
+
+        function startSlideshow() {
+            // Clear any existing interval to prevent multiple intervals running
+            clearInterval(slideshowInterval);
+            
+            // Set up new interval
+            slideshowInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                document.getElementById('notif-img').src = images[currentIndex];
+            }, slideshowDelay);
+        }
+
+        // Initialize the slideshow
+        window.onload = function() {
+            displayLoginTime();
+            startSlideshow();
+        };
+
+        // Retrieve and format login time
+        function displayLoginTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
+            document.getElementById('login-date').textContent = now.toLocaleDateString('en-US', options);
+            
+            const timeOptions = { hour: '2-digit', minute: '2-digit' };
+            document.getElementById('login-time').textContent = now.toLocaleTimeString('en-US', timeOptions);
+        }
+    </script>
+
+</body>
+</html>
